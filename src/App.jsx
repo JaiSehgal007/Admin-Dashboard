@@ -87,12 +87,12 @@ const AdminDashboard = () => {
     let updatedUsers = users.filter(
       (user) => user.id !== userID
     );
-  
+
     console.log(updatedUsers);
     setUsers(updatedUsers);
   };
-  
-  
+
+
 
   // Toggling the selection of a row
   const handleRowSelect = (userId) => {
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
 
   const borderStyle = {
     border: '1px solid rgb(207, 207, 207)',
-    backgroundColor:'white'
+    backgroundColor: 'white'
   };
 
   return (
@@ -218,7 +218,22 @@ const AdminDashboard = () => {
                   user.email
                 )}
               </td>
-              <td>{user.role}</td>
+              <td>
+                {editingUser && editingUser.id === user.id ? (
+                  <input
+                    type="text"
+                    value={editingUser.role}
+                    onChange={(e) =>
+                      setEditingUser({
+                        ...editingUser,
+                        role: e.target.value,
+                      })
+                    }
+                  />
+                ) : (
+                  user.role
+                )}
+              </td>
               <td>
                 {editingUser && editingUser.id === user.id ? (
                   <button onClick={handleSaveEdit}>Save</button>
